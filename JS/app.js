@@ -5,7 +5,9 @@ const aplicacion_contactos = new Vue({
 
         contactos: [],
         NombreContacto: "",
-        TelefonoContacto: ""
+        TelefonoContacto: "",
+        NombreEditar: "",
+        TelefonoEditar: ""
     },
     methods: {
 
@@ -24,33 +26,35 @@ const aplicacion_contactos = new Vue({
 
         EditarContacto: function(con){
 
-            if(this.NombreContacto == ""){
+            if(this.NombreEditar == ""){
 
-                this.contactos[con].telefono = this.TelefonoContacto;
-                this.TelefonoContacto = "";
+                this.contactos[con].telefono = this.TelefonoEditar;
+                this.TelefonoEditar = "";
             }
 
-            else if(this.TelefonoContacto == ""){
+            else if(this.TelefonoEditar == ""){
 
-                this.contactos[con].nombre = this.NombreContacto;
-                this.NombreContacto = "";
+                this.contactos[con].nombre = this.NombreEditar;
+                this.NombreEditar = "";
             }
 
             else{
 
-                this.contactos[con].telefono = this.TelefonoContacto;
-                this.contactos[con].nombre = this.NombreContacto;
-                this.NombreContacto = "";
-                this.TelefonoContacto = "";
+                this.contactos[con].telefono = this.TelefonoEditar;
+                this.contactos[con].nombre = this.NombreEditar;
+                this.NombreEditar = "";
+                this.TelefonoEditar = "";
             }
             localStorage.setItem('gym-con', JSON.stringify(this.contactos));
+            
         },
 
         EliminarContacto: function(con){
             this.contactos.splice(con, 1)
             localStorage.setItem('gym-con', JSON.stringify(this.contactos));
         }
-    },
+
+        },
 
     created: function(){
         let DATOS = JSON.parse(localStorage.getItem('gym-con'));
@@ -65,4 +69,8 @@ const aplicacion_contactos = new Vue({
 // Autocompletado del teléfono
 $(document).ready(function(){
     $("#telefono").mask("000-000-0000");
+});
+
+$(document).ready(function(){
+    $("#editTelefono").mask("000-000-0000");
 });
