@@ -26,9 +26,10 @@
         <!-- input para colocar información de contacto -->
         <input type="text" class="form-control my-3" placeholder="Digite el nombre del contacto" v-model="NombreContacto">
         <input type="text" id="telefono" class="form-control my-3" placeholder="Digite el telefono del contacto" v-model="TelefonoContacto" v-on:keyup.enter="AgregarContacto">
+        <input type="text" class="form-control my-3" placeholder="Filtrar por nombre" v-model="Filtrar">
         <button class="btn btn-primary" @click="AgregarContacto" id="buton">Agregar contacto</button>
 
-        <div class="mt-3" v-for="(contact, con) of contactos">
+        <div class="mt-3" v-for="(contact, con) of FiltrarContacto">
             <div class="card-deck">
                 <div class="card" style="width: 15rem;">
                     <img class="card-img-top" src="CSS/usuario.png" alt="Card image cap">
@@ -39,8 +40,8 @@
                                <br> <br>
                             </div>
                             <div>
-                                <input type="text" class="form-control my-3" placeholder="Digite el nombre del contacto" v-model="NombreEditar">
-                                <input type="text" class="form-control my-3" placeholder="Digite el teléfono del contacto" v-model="TelefonoEditar" id="editTelefono">
+                                <!-- <input type="text" class="form-control my-3" placeholder="Digite el nombre del contacto" v-model="NombreEditar">
+                                <input type="text" class="form-control my-3" placeholder="Digite el teléfono del contacto" v-model="TelefonoEditar" id="editTelefono"> -->
                                 <button class="btn btn-success" @click="EditarContacto(con)">Editar</button>
                                 <button class="btn btn-danger"@click="EliminarContacto(con)">Eliminar</button>
                             </div>

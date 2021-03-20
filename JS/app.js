@@ -6,8 +6,7 @@ const aplicacion_contactos = new Vue({
         contactos: [],
         NombreContacto: "",
         TelefonoContacto: "",
-        NombreEditar: "",
-        TelefonoEditar: ""
+        Filtrar: ""
     },
     methods: {
 
@@ -26,24 +25,24 @@ const aplicacion_contactos = new Vue({
 
         EditarContacto: function(con){
 
-            if(this.NombreEditar == ""){
+            if(this.NombreContacto == ""){
 
-                this.contactos[con].telefono = this.TelefonoEditar;
-                this.TelefonoEditar = "";
+                this.contactos[con].telefono = this.TelefonoContacto;
+                this.TelefonoContacto = "";
             }
 
-            else if(this.TelefonoEditar == ""){
+            else if(this.TelefonoContacto == ""){
 
-                this.contactos[con].nombre = this.NombreEditar;
-                this.NombreEditar = "";
+                this.contactos[con].nombre = this.NombreContacto;
+                this.NombreContacto = "";
             }
 
             else{
 
-                this.contactos[con].telefono = this.TelefonoEditar;
-                this.contactos[con].nombre = this.NombreEditar;
-                this.NombreEditar = "";
-                this.TelefonoEditar = "";
+                this.contactos[con].telefono = this.TelefonoContacto;
+                this.contactos[con].nombre = this.NombreContacto;
+                this.NombreContacto = "";
+                this.TelefonoContacto = "";
             }
             localStorage.setItem('gym-con', JSON.stringify(this.contactos));
             
@@ -62,6 +61,17 @@ const aplicacion_contactos = new Vue({
             this.contactos = [];
         }else{
             this.contactos = DATOS;
+        }
+    },
+
+    computed: {
+
+        FiltrarContacto: function(){
+
+            return this.contactos.filter((contacto) => {
+
+                return contacto.nombre.match(this.Filtrar);
+            });
         }
     }
 });
